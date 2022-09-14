@@ -47,6 +47,12 @@ Check all project files are formatted as expected as follows:
 sbt scalafmtCheckAll scalafmtCheck
 ```
 
+Format `*.sbt` and `project/*.scala` files as follows:
+
+```bash
+sbt scalafmtSbt
+```
+
 Format all project files as follows:
 
 ```bash
