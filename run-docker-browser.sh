@@ -1,21 +1,21 @@
 #!/bin/bash
 
 #######################################
-# The script starts a chrome, edge or firefox docker container for running browser tests on a developer machine only.
+# The script starts Chrome, Edge or Firefox browser in a Docker container for running browser tests locally.
 # The container directs TCP requests from the container to the host machine enabling testing services running via Service Manager.
-# WARNING: Do not use this script in the Jenkins Continuous Integration environment
+# WARNING: Do not use this script in the Jenkins Continuous Integration environment.
 #
 # Arguments:
 #   chrome, edge or firefox
 #
 # Output:
-#   Starts  chrome, edge or firefox docker containers from chrome-with-rinetd, edge-with-rinetd or firefox-with-rinetd image respectively
+#   Starts Chrome, Edge or Firefox browser in a Docker container based on chrome-with-rinetd, edge-with-rinetd or firefox-with-rinetd image respectively.
 #######################################
 
 #######################################
-# Requires services under test running via Service Manager
+# Requires services under test running via Service Manager.
 # Initializes port_mappings with all running application ports using the Service Manager status command.
-# Appends ZAP_PORT 11000 to ./run-zap-spec.sh
+# Appends ZAP_PORT 11000 to ./run-zap-spec.sh.
 #######################################
 port_mappings=$(sm2 --status | grep PASS | awk '{ print $8"->"$8 }' | paste -sd "," -)
 port_mappings="$port_mappings,11000->11000"
@@ -24,7 +24,7 @@ port_mappings="$port_mappings,11000->11000"
 #port_mappings="9032->9032,9250->9250,9080->9080"
 
 #######################################
-# Defines the BROWSER variable from the argument passed to the script
+# Defines the BROWSER variable from the argument passed to the script.
 #######################################
 if [ -z "${1}" ]; then
   echo "ERROR: Browser type not specified. Re-run the script with the option chrome, edge or firefox."
@@ -38,11 +38,11 @@ elif [ "${1}" = "firefox" ]; then
 fi
 
 #######################################
-# Pulls the BROWSER image from artifactory and runs the container with the specified options.
+# Pulls the BROWSER image from artifactory and runs the Docker container with the specified options.
 #
 # Accepted Environment Variables:
 # PORT_MAPPINGS: List of the ports of the services under test.
-# TARGET_IP: IP of the host machine. For Mac this is 'host.docker.internal'. For linux this is 'localhost'
+# TARGET_IP: IP of the host machine. For Mac this is 'host.docker.internal'. For linux this is 'localhost'.
 #
 # The latest version of the docker images are available at:
 # https://artefacts.tax.service.gov.uk/artifactory/webapp/#/artifacts/browse/tree/General/chrome-with-rinetd
