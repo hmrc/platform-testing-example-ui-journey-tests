@@ -20,10 +20,10 @@ import com.typesafe.config.{Config, ConfigFactory}
 
 object TestConfiguration {
 
-  val config: Config        = ConfigFactory.load()
-  val env: String           = config.getString("environment")
-  val defaultConfig: Config = config.getConfig("local")
-  val envConfig: Config     = config.getConfig(env).withFallback(defaultConfig)
+  private val config: Config        = ConfigFactory.load()
+  private val env: String           = config.getString("environment")
+  private val defaultConfig: Config = config.getConfig("local")
+  private val envConfig: Config     = config.getConfig(env).withFallback(defaultConfig)
 
   def url(service: String): String = {
     val host = env match {
