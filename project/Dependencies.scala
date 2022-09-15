@@ -8,7 +8,7 @@ object Dependencies {
     "org.scalatest"       %% "scalatest"      % "3.2.13"   % Test,
     "org.scalatestplus"   %% "selenium-4-2"   % "3.2.13.0" % Test,
     "org.slf4j"            % "slf4j-simple"   % "2.0.0"    % Test,
-    "uk.gov.hmrc"         %% "webdriver-hmrc" % "1.0.0"    % Test
+    "uk.gov.hmrc"         %% "webdriver-hmrc" % "0.+"      % Test // Do NOT use .+ notation in test repositories
   )
 
 }
